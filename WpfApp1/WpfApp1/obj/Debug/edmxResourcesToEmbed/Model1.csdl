@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SalonKrasotyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="IdClients" />
+    </Key>
+    <Property Name="IdClients" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="MiddleName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="Int32" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Sale">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdProd" Type="Int32" />
+    <Property Name="Amount" Type="Int32" />
+    <Property Name="date" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Services" Relationship="Self.FK_Sale_Services" FromRole="Sale" ToRole="Services" />
+  </EntityType>
+  <EntityType Name="Services">
+    <Key>
+      <PropertyRef Name="IdProduct" />
+    </Key>
+    <Property Name="IdProduct" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NameProd" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="NamePhoto" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Suplyer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Price" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Picture" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="Sale" Relationship="Self.FK_Sale_Services" FromRole="Services" ToRole="Sale" />
+    <Property Name="Cost" Type="Decimal" Precision="19" Scale="4" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Sale_Services">
+    <End Role="Services" Type="Self.Services" Multiplicity="0..1" />
+    <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Services">
+        <PropertyRef Name="IdProduct" />
+      </Principal>
+      <Dependent Role="Sale">
+        <PropertyRef Name="IdProd" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SalonKrasotyEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Client" EntityType="Self.Client" />
+    <EntitySet Name="Sale" EntityType="Self.Sale" />
+    <EntitySet Name="Services" EntityType="Self.Services" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <AssociationSet Name="FK_Sale_Services" Association="Self.FK_Sale_Services">
+      <End Role="Services" EntitySet="Services" />
+      <End Role="Sale" EntitySet="Sale" />
+    </AssociationSet>
+    <EntitySet Name="Order" EntityType="SalonKrasotyModel.Order" />
+    <EntitySet Name="OrderProduct" EntityType="SalonKrasotyModel.OrderProduct" />
+  </EntityContainer>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="IdOrder" />
+    </Key>
+    <Property Name="IdOrder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdClient" Type="Int32" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="OrderProduct">
+    <Key>
+      <PropertyRef Name="IdOrderProduct" />
+    </Key>
+    <Property Name="IdOrderProduct" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderId" Type="Int32" />
+    <Property Name="IdServices" Type="Int32" />
+    <Property Name="Count" Type="Int32" />
+    <Property Name="Sum" Type="Decimal" Precision="19" Scale="4" />
+  </EntityType>
+</Schema>

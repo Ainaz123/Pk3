@@ -1,0 +1,84 @@
+﻿<Window x:Class="WpfApp1.Avtoriz"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="Авторизация" Height="450" Width="800" FontFamily="Tahoma" Icon="/beauty_logo.ico">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="60"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid
+            Grid.Row="0"
+            Grid.ColumnSpan="3"
+            Background="#FFE1E4FF">
+            <Image Source="beauty_logo.png"
+                   HorizontalAlignment="Left"
+                   Width="50"
+                   Margin="30 0 0 0"/>
+            <Label
+                Content="ООО Авториз"
+                FontSize="24"
+                HorizontalAlignment="Center"
+                Height="40"/>
+        </Grid>
+        <Label
+            Content="Добро пожаловать!"
+            FontSize="20"
+            Grid.Row="1"
+            Height="40"
+            Width="200"
+            Grid.ColumnSpan="2"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Center"
+            Margin="50"/>
+        <StackPanel
+            Grid.Row="1"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Margin="316,0,0,0">
+            <Label
+                Content="Логин"
+                FontSize="16"/>
+            <Label
+                Content="Пароль"
+                FontSize="16"
+                Margin="0 20 0 0"/>
+        </StackPanel>
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="1"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Margin="20,0,0,0">
+            <TextBox
+                x:Name="InputLog"
+                Width="150"
+                Height="35"
+                FontSize="16"/>
+            <TextBox
+                x:Name="InputPas"
+                Width="150"
+                Height="35"
+                FontSize="16"
+                Margin="0 10 0 0"/>
+        </StackPanel>
+        <Button
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            Width="150"
+            Height="35"
+            VerticalAlignment="Bottom"
+            Margin="50"
+            Content="Войти"
+            FontSize="18" Click="Button_Click"/>
+    </Grid>
+</Window>

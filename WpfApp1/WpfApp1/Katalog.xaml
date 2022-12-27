@@ -1,0 +1,140 @@
+﻿<Window x:Class="WpfApp1.Katalog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="Katalog" Height="450" Width="800" FontFamily="Tahoma" Icon="/beauty_logo.ico">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="60"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid
+            Grid.Row="0"
+            Grid.ColumnSpan="3"
+            Background="#FFE1E4FF">
+            <Image Source="beauty_logo.png"
+                   HorizontalAlignment="Left"
+                   Width="50"
+                   Margin="30 0 0 0"/>
+            <Label
+                Content="Каталог"
+                FontSize="24"
+                HorizontalAlignment="Center"
+                Height="40"/>
+        </Grid>
+        <ListView
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            Margin="50"
+            x:Name="Lv">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <DockPanel
+                        Width="500"
+                        Height="100">
+                        <Border BorderBrush="Black" BorderThickness="2">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition
+                                        Width="100"/>
+                                    <ColumnDefinition
+                                        Width="300"/>
+                                    <ColumnDefinition
+                                        Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="{Binding Picture}"/>
+                                <StackPanel
+                                    Grid.Column="1">
+                                    <TextBlock Text="{Binding NameProd}" Width="290" TextWrapping="Wrap" FontSize="16"/>
+                                    <TextBlock Text="{Binding Suplyer}" FontSize="16"/>
+                                </StackPanel>
+                                <TextBlock Text="{Binding Price}" Grid.Column="2" FontSize="16"/>
+                                <Image>
+                                    <Image.Source>
+                                        <Binding Path="Picture">
+                                            <Binding.TargetNullValue>
+                                                <ImageSource>
+                                                    beauty_logo.png
+                                                </ImageSource>
+                                            </Binding.TargetNullValue>
+                                        </Binding>
+                                    </Image.Source>
+                                </Image>
+                            </Grid>
+                        </Border>
+                    </DockPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="В корзину" Click="MenuItem_Click"></MenuItem>
+                </ContextMenu>
+            </ListView.ContextMenu>
+        </ListView>
+        <ComboBox
+            x:Name="Sort"
+            Width="150"
+            Height="30"
+            Grid.Row="1"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Margin="5">
+            <ComboBoxItem>По убыванию</ComboBoxItem>
+            <ComboBoxItem>По возрастанию</ComboBoxItem>
+        </ComboBox>
+        <ComboBox
+            x:Name="filtr"
+            Width="150"
+            Height="30"
+            Grid.Row="1"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Margin="5"
+            Grid.ColumnSpan="2">
+            <ComboBoxItem>До 1500</ComboBoxItem>
+            <ComboBoxItem>1501-3000</ComboBoxItem>
+        </ComboBox>
+        <TextBox
+            x:Name="Find"
+            Width="150"
+            Height="30"
+            Grid.Row="1"
+            Grid.Column="2"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Right"
+            Margin="5" TextChanged="Find_TextChanged"/>
+        <StackPanel
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            Orientation="Horizontal"
+            VerticalAlignment="Bottom"
+            Width="520"
+            Margin="3">
+            <Button
+                Width="150"
+                Height="30"
+                Content="Добавить"
+                x:Name="AddBtn" Click="AddBtn_Click"/>
+            <Button
+                Width="150"
+                Height="30"
+                Content="Редактировать"
+                x:Name="EditBtn"
+                Margin="30 0 0 0" Click="EditBtn_Click"/>
+            <Button
+                Width="150"
+                Height="30"
+                Content="Удалить"
+                x:Name="DelBtn"
+                Margin="30 0 0 0" Click="DelBtn_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
